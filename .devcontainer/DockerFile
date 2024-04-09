@@ -1,0 +1,23 @@
+# Use the official image as a parent image
+FROM mcr.microsoft.com/devcontainers/base:jammy
+
+# Set the working directory
+WORKDIR /app
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    build-essential \
+    wget \
+    tar
+
+# Download and install Clarinet
+RUN wget https://github.com/hirosystems/clarinet/releases/download/v2.4.1/clarinet-linux-x64-glibc.tar.gz \
+    && tar -xzf clarinet-linux-x64-glibc.tar.gz \
+    && mv clarinet /usr/local/bin \
+    && chmod +x /usr/local/bin/clarinet \
+    && rm clarinet-linux-x64-glibc.tar.gz
+
+# Confirm Clarinet installation
+RUN clarinet --version
