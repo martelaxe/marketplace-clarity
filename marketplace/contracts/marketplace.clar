@@ -39,9 +39,13 @@
 	}
 )
 
+
+
 (define-data-var listing-nonce uint u0)
 
 (define-map whitelisted-asset-contracts principal bool)
+
+
 
 (define-read-only (is-whitelisted (asset-contract principal))
 	(default-to false (map-get? whitelisted-asset-contracts asset-contract))
@@ -127,3 +131,4 @@
 		(ok listing-id)
 	)
 )
+
